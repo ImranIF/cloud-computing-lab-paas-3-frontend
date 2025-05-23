@@ -1,4 +1,8 @@
-# React + Vite
+# Deployment
+
+Live version is deployed here: https://cloud-computing-lab-paas-3-frontend.vercel.app/
+
+## React + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 

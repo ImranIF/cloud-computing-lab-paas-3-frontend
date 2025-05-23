@@ -8,6 +8,7 @@ function App() {
   const [message, setMessage] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const handleAuth = async () => {
     const endpoint = isLoginMode ? "/login" : "/register";
@@ -22,9 +23,13 @@ function App() {
       );
       setMessage(response.data.message);
       setError("");
+      if (isLoginMode) {
+        setIsLoggedIn(true);
+      }
     } catch (err) {
       setMessage("");
       setError(err.response?.data?.error || "Something went wrong");
+      setIsLoggedIn(false);
     } finally {
       setLoading(false);
     }
@@ -74,6 +79,7 @@ function App() {
               setIsLoginMode(!isLoginMode);
               setMessage("");
               setError("");
+              setIsLoggedIn(false);
             }}
           >
             Switch to {isLoginMode ? "Register" : "Login"}
@@ -90,6 +96,16 @@ function App() {
           </div>
         )}
       </div>
+      {isLoggedIn && isLoginMode && (
+        <div className="card mt-4 shadow">
+          <div className="card-body text-center">
+            <h4 className="card-title">Welcome!</h4>
+            <p className="card-text">
+              You are logged in as <strong>{username}</strong>.
+            </p>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
